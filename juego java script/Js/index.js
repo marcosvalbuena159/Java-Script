@@ -1,14 +1,11 @@
-// Función para registrar al usuario
 function Registro() {
     let nombre = document.getElementById('nombre').value;
-    let region = document.getElementById('region').value;
     let usuario = document.getElementById('usuario').value;
     let correo = document.getElementById('correo').value;
     let clave = document.getElementById('clave').value;
-    if (nombre && region && usuario && correo && clave) {
+    if (nombre && usuario && correo && clave) {
         let usuarioRegistrado = {
             nombre: nombre,
-            region: region,
             usuario: usuario,
             correo: correo,
             clave: clave
@@ -17,6 +14,7 @@ function Registro() {
 
         alert("Usuario registrado exitosamente");
         document.getElementById('registroForm').reset();
+        window.location.href = "../vistas/login.html";
     } else {
         alert("Complete todos los campos");
     }
@@ -29,6 +27,7 @@ function Loguear() {
         if (usuarioGuardado) {
             if (correoIngresado === usuarioGuardado.correo && claveIngresada === usuarioGuardado.clave) {
                 alert("Inicio de sesión exitoso");
+                window.location.href = "../vistas/entrenador.html";
             } else {
                 alert("Correo o contraseña incorrectos");
             }
@@ -39,7 +38,6 @@ function Loguear() {
         alert("Por favor ingrese correo y contraseña");
     }
 }
-
 
 class Entrenador {
     constructor(nombreEntrenador) {
@@ -90,5 +88,3 @@ let pokimons = [
     new Pokimon("Squirtle", "Agua", "Torrente", 48, 65, "Wartortle"),
     new Pokimon("Eevee", "Normal", "Adaptable", 55, 50, "Varias Evoluciones")
 ];
-
-

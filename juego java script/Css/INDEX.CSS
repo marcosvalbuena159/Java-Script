@@ -1,46 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat Alternates', sans-serif;
 }
-body{
-    background: aliceblue;
-    background-size: 100vw 100vh;
+
+body {
+    background-image: url("https://img.freepik.com/vector-gratis/fondo-estilo-comico-diseno-plano_52683-53321.jpg");
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
 }
-.container{
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(87, 87, 87, 0.4);
+    z-index: -1;
+}
+
+.container {
+    text-align: center;
+}
+
+p {
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 40px;
+    color: white;
+    text-transform: uppercase;
+    text-shadow:
+        3px 3px 0px rgb(116, 61, 36),
+        6px 6px 0px black,
+        9px 9px 0px rgb(116, 61, 36);
+    margin-bottom: 20px;
+}
+
+.body-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.contenedor-sesion {
+    background-color: #ffffff;
     width: 90%;
-    max-width: 1200px;
-    margin: auto;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, .1);
+    padding: 20px;
+    text-align: center;
 }
-.container .btn-menu, .logo{
-    float: left;
-    line-height:100px;
+
+.titulo-seccion h5 {
+    font-size: 1.5em;
+    margin-bottom: 1rem;
 }
-.logo h1{
-    color: #000000;
-    font-weight: 400;
-    font-size: 22px;
-    margin-left: 10px;
+
+.form-input {
+    position: relative;
+    margin-bottom: 1.5rem;
 }
-.container .menu{
-    float: right;
-    line-height: 100px;
+
+.form-input input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    padding: 8px;
+    outline: none;
+    font-size: 16px;
 }
-.container .menu a{
-    display: inline-block;
-    padding: 15px;
-    line-height: normal;
-    text-decoration: none;
-    color: #000000;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-    font-size: 15px;
-    margin-right: 5px;
+
+.form-input input:focus {
+    border-bottom: 1px solid #744214;
 }
-.container .menu a:hover{
-    border-bottom: 2px solid #000000;
-    padding-bottom: 5px;
+.form-boton {
+    margin-top: 10px;
 }
+
+.btn-primary {
+    background-color: #744214;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #553313;
+}
+
+@media (max-width: 780px) {
+    .contenedor-sesion {
+        width: 90%;
+    }
+
+    p {
+        font-size: 24px;
+    }
+}
+
