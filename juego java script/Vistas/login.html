@@ -1,49 +1,45 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POKIMON</title>
-    <link rel="stylesheet" href="../Css/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+<html lang="es"> <!-- Indica que el contenido del documento está en español -->
+<head> <!-- La sección head contiene metadatos, enlaces a hojas de estilo y scripts -->
+    <meta charset="UTF-8"> <!-- Establece la codificación de caracteres a UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura el viewport para dispositivos móviles -->
+    <title>POKIMON</title> <!-- Título de la página que aparece en la pestaña del navegador -->
+    <link rel="stylesheet" href="../Css/index.css"> <!-- Enlace a una hoja de estilo externa -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"> <!-- Enlace a los iconos de Bootstrap -->
 </head>
-
-<body>
-    <div class="container text-center">
-        <p>BIENVENIDO AL MUNDO POKIMON</p>
-        <div class="container">
-            <div class="buttons">
-                <button class="btn btn-primary" type="button" onclick="window.location.href='index.html'">Inicio</button>
-                <button class="btn btn-primary" type="button" onclick="window.location.href='registro.html'">Registro</button>
+<body> <!-- La sección body contiene el contenido visible de la página -->
+    <div class="container text-center"> <!-- Contenedor principal con texto centrado -->
+        <p>BIENVENIDO AL MUNDO POKIMON</p> <!-- Mensaje de bienvenida -->
+        <div class="container"> <!-- Contenedor para los botones de navegación -->
+            <div class="buttons"> <!-- Agrupa los botones -->
+                <button onclick="window.location.href='index.html'">Inicio</button> <!-- Botón de navegación a la página de inicio -->
+                <button onclick="window.location.href='registro.html'">Registro</button> <!-- Botón de navegación a la página de registro -->
                 <br>
                 <br>
             </div>
-        </div>
-        <div class="body-contenedor">
-            <div class="contenedor-sesion">
-                <div class="seccion">
-                    <div class="titulo-seccion">
-                        <h5>Iniciar Sesión</h5>
+            <div class="body-contenedor"> <!-- Contenedor para el formulario de inicio de sesión -->
+                <div class="contenedor-sesion"> <!-- Contenedor específico para la sección de sesión -->
+                    <div class="seccion"> <!-- Sección que agrupa el formulario -->
+                        <div class="titulo-seccion"> <!-- Título de la sección -->
+                            <h5>Iniciar Sesión</h5> <!-- Título que indica que es el formulario de inicio de sesión -->
+                        </div>
+                        <form id="registroForm" onsubmit="event.preventDefault(); Registro();"> <!-- Formulario con ID y evitando el envío por defecto -->
+                            <div class="form-input"> <!-- Contenedor para el campo de correo -->
+                                <input type="email" placeholder="Correo" id="correo" required> <!-- Campo de entrada para el correo -->
+                            </div>
+                            <div class="form-input"> <!-- Contenedor para el campo de contraseña -->
+                                <input type="password" placeholder="Contraseña" id="clave" required> <!-- Campo de entrada para la contraseña -->
+                            </div>
+                            <div class="form-boton"> <!-- Contenedor para el botón de envío -->
+                                <!-- Corregir la sintaxis del botón y la función que debe ejecutar -->
+                                <button class="btn" onclick="Loguear()">Iniciar Sesión</button> <!-- Botón que ejecutará la función Loguear al hacer clic -->
+                            </div>
+                        </form>
                     </div>
-                    <form id="registroForm" onsubmit="event.preventDefault(); Registro();">
-                        <div class="form-input">
-                            <input type="email" placeholder="Correo" id="correo" required>
-                        </div>
-                        <div class="form-input">
-                            <input type="password" placeholder="Contraseña" id="clave" required>
-                        </div>
-                        <div class="form-boton">
-                            <button class="btn btn-primary w-100" type="submit" onclick="Loguear()">Iniciar Sesión</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src="../Js/index.js"></script>
+    <script src="../Js/index.js"></script> <!-- Enlaza el archivo JavaScript externo para la funcionalidad -->
 </body>
-
 </html>

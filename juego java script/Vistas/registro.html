@@ -1,58 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POKIMON</title>
-    <link rel="stylesheet" href="../Css/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+<!DOCTYPE html> <!-- Declara el tipo de documento HTML5 -->
+<html lang="es"> <!-- Define el idioma de la página como español -->
+<head> <!-- Sección del encabezado donde se definen los metadatos, enlaces a archivos CSS y scripts -->
+    <meta charset="UTF-8"> <!-- Establece la codificación de caracteres como UTF-8, que soporta una amplia gama de caracteres, incluidos los acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la vista para que la página se vea correctamente en dispositivos móviles -->
+    <title>POKIMON</title> <!-- Define el título de la página que aparecerá en la pestaña del navegador -->
+    <link rel="stylesheet" href="../Css/index.css"> <!-- Enlaza el archivo CSS que dará estilo a la página -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"> <!-- Enlaza la biblioteca de iconos de Bootstrap para usarlos en la página -->
 </head>
-
-<body>
-    <center>
-        <div class="container text-center">
-            <p>BIENVENIDO AL MUNDO POKIMON</p>
-            <div class="container">
-                <div class="buttons">
-                    <button class="btn btn-primary" type="button" onclick="window.location.href='index.html'">Inicio</button>
-                    <button class="btn btn-primary" type="button" onclick="window.location.href='login.html'">Inicio Sesion</button>
-                    <br>
-                    <br>
-                </div>
-            </div>
-            <div class="body-contenedor">
-                <div class="contenedor-sesion">
-                    <div class="seccion">
-                        <div class="titulo-seccion">
-                            <h5>Registro</h5>
+<body> <!-- Comienza la sección del cuerpo de la página, que contiene el contenido visible -->
+    <div class="container text-center"> <!-- Crea un contenedor centrado utilizando las clases de Bootstrap -->
+        <p>BIENVENIDO AL MUNDO POKIMON</p> <!-- Un párrafo que muestra un mensaje de bienvenida al usuario -->
+        <div class="buttons"> <!-- Un contenedor para los botones de navegación -->
+            <button onclick="window.location.href='index.html'" class="btn btn-primary">Inicio</button> <!-- Botón que redirige a la página de inicio -->
+            <button onclick="window.location.href='login.html'" class="btn btn-secondary">Inicio Sesión</button> <!-- Botón que redirige a la página de inicio de sesión -->
+            <br><br> <!-- Se añaden saltos de línea para separar los botones -->
+        </div>
+        <div class="body-contenedor"> <!-- Contenedor que agrupa el formulario de registro -->
+            <div class="contenedor-sesion"> <!-- Contenedor que contiene la sección de registro -->
+                <div class="seccion"> <!-- Contenedor que agrupa la sección de formulario -->
+                    <div class="titulo-seccion"> <!-- Contenedor que agrupa el título de la sección -->
+                        <h5>Registro</h5> <!-- Título que indica que es el formulario de registro -->
+                    </div>
+                    <form id="registroForm" onsubmit="event.preventDefault(); Registro();"> <!-- El formulario para el registro, que evita el comportamiento por defecto y ejecuta la función Registro() cuando se envía -->
+                        <div class="form-input"> <!-- Contenedor para el campo de nombre -->
+                            <input type="text" placeholder="Nombre" id="nombre" required> <!-- Campo para ingresar el nombre, con el atributo required para que sea obligatorio -->
                         </div>
-                    <form id="registroForm" onsubmit="event.preventDefault(); Registro();">
-                        <div class="form-input">
-                            <input type="text" placeholder="Nombre" id="nombre" required>
+                        <div class="form-input"> <!-- Contenedor para el campo de región -->
+                            <input type="text" placeholder="Región" id="region" required> <!-- Campo para ingresar la región, con el atributo required -->
                         </div>
-                        <div class="form-input">
-                            <input type="text" placeholder="Región" id="region" required>
+                        <div class="form-input"> <!-- Contenedor para el campo de usuario -->
+                            <input type="text" placeholder="Usuario" id="usuario" required> <!-- Campo para ingresar el nombre de usuario, con el atributo required -->
                         </div>
-                        <div class="form-input">
-                            <input type="text" placeholder="Usuario" id="usuario" required>
+                        <div class="form-input"> <!-- Contenedor para el campo de correo -->
+                            <input type="email" placeholder="Correo" id="correo" required> <!-- Campo para ingresar el correo electrónico, con el atributo required y tipo email para validar la entrada -->
                         </div>
-                        <div class="form-input">
-                            <input type="email" placeholder="Correo" id="correo" required>
+                        <div class="form-input"> <!-- Contenedor para el campo de contraseña -->
+                            <input type="password" placeholder="Contraseña" id="clave" required> <!-- Campo para ingresar la contraseña, con el atributo required y tipo password para ocultar la entrada -->
                         </div>
-                        <div class="form-input">
-                            <input type="password" placeholder="Contraseña" id="clave" required>
-                        </div>
-                        <button class="btn btn-primary btn-form registro" type="submit">Registrar</button>
+                        <button type="submit" class="btn btn-success">Registrar</button> <!-- Botón para enviar el formulario, que al hacer clic ejecuta la función Registro() -->
                     </form>
                 </div>
             </div>
         </div>
-    </center>
-
-    <script src="../Js/index.js"></script>
+    </div>
+    <script src="../Js/index.js"></script> <!-- Enlaza el archivo JavaScript donde se encuentra la función Registro() que maneja la lógica del registro -->
 </body>
 
 </html>

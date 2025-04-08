@@ -1,26 +1,28 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Declaración del tipo de documento, indicando que es un documento HTML5 -->
 <html lang="es">
-
-<head>
+<!-- Etiqueta HTML que comienza el documento, con el atributo lang="es" que indica que el contenido está en español -->
+<head> <!-- La sección head contiene metadatos, enlaces a hojas de estilo y scripts -->
     <meta charset="UTF-8">
+    <!-- Establece la codificación de caracteres a UTF-8, que soporta una amplia gama de caracteres (incluyendo acentos, símbolos, etc.) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POKIMON</title>
+    <!-- Configura el viewport para que la página se ajuste correctamente en dispositivos móviles -->
+    <title>POKIMON</title> <!-- Define el título de la página que aparecerá en la pestaña del navegador -->
     <link rel="stylesheet" href="../Css/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- Enlaza un archivo CSS externo para darle estilo a la página, con la ruta relativa hacia el archivo "index.css" -->
     <script src="../Js/index.js"></script>
-</head>
-
-<body>
-    
-    <p>BIENVENIDO AL MUNDO POKIMON</p>
-    <div class="container">
-        <div class="buttons">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='index.html'">Inicio</button>
-            <button class="btn btn-primary" type="button" onclick="window.location.href='login.html'">Inicio Seción</button>
-            <button class="btn btn-primary" type="button" onclick="window.location.href='registro.html'">Registro</button>
-        </div>
-    </div>
-</body>
-
-</html>
+    <!-- Enlaza un archivo JavaScript externo que proporcionará funcionalidad a la página, con la ruta relativa hacia "index.js" -->
+</head> <!-- Cierre de la sección head -->
+<body> <!-- La sección body contiene el contenido visible de la página -->
+    <p>BIENVENIDO AL MUNDO POKIMON</p> <!-- Un párrafo que da la bienvenida a los usuarios al "Mundo POKIMON" -->
+    <div class="container"> <!-- Un contenedor para agrupar y organizar los elementos de la página -->
+        <div class="buttons"> <!-- Un div que agrupa los botones de navegación -->
+            <button onclick="window.location.href='index.html'">Inicio</button>
+            <!-- Botón que, al hacer clic, redirige a la página 'index.html' (la página de inicio) -->
+            <button onclick="window.location.href='login.html'">Inicio Seción</button>
+            <!-- Botón que, al hacer clic, redirige a la página 'login.html' (la página de inicio de sesión) -->
+            <button onclick="window.location.href='registro.html'">Registro</button>
+            <!-- Botón que, al hacer clic, redirige a la página 'registro.html' (la página de registro) -->
+        </div> <!-- Cierre del div de los botones -->
+    </div> <!-- Cierre del contenedor -->
+</body> <!-- Fin del cuerpo de la página -->
+</html> <!-- Fin del documento HTML -->

@@ -1,117 +1,212 @@
+/* Importación de fuentes de Google */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap');
 
+/* Aplica un estilo global a todos los elementos */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat Alternates', sans-serif;
+    margin: 0; /* Elimina el margen predeterminado de todos los elementos */
+    padding: 0; /* Elimina el padding predeterminado de todos los elementos */
+    box-sizing: border-box; /* Cambia el modelo de caja para incluir el padding y el borde en las dimensiones del elemento */
+    font-family: 'Montserrat Alternates', sans-serif; /* Establece la fuente predeterminada de todos los elementos */
 }
 
+/* Estilos para el cuerpo de la página */
 body {
-    background-image: url("https://img.freepik.com/vector-gratis/fondo-estilo-comico-diseno-plano_52683-53321.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
+    background-image: url("https://img.freepik.com/vector-gratis/fondo-estilo-comico-diseno-plano_52683-53321.jpg"); /* Establece una imagen de fondo */
+    background-size: cover; /* Asegura que la imagen de fondo cubra toda la pantalla */
+    background-position: center; /* Centra la imagen de fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100vh; /* La altura será del 100% de la altura de la ventana del navegador */
+    display: flex; /* Utiliza Flexbox para organizar los elementos */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    flex-direction: column; /* Alinea los elementos de manera vertical */
+    position: relative; /* Establece la posición como relativa para poder superponer elementos */
 }
 
+/* Filtro semitransparente sobre el fondo */
 body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(87, 87, 87, 0.4);
-    z-index: -1;
+    content: ''; /* El contenido está vacío */
+    position: absolute; /* Posiciona el pseudo-elemento de forma absoluta */
+    top: 0; left: 0; right: 0; bottom: 0; /* Ocupa toda la pantalla */
+    background-color: rgba(87, 87, 87, 0.4); /* Aplica un color gris semitransparente */
+    z-index: -1; /* Coloca el pseudo-elemento detrás del contenido de la página */
 }
 
+/* Contenedor principal centrado */
 .container {
-    text-align: center;
+    text-align: center; /* Centra el texto dentro del contenedor */
 }
 
+/* Estilos para el párrafo que contiene el título "Entrenador" */
 p {
-    font-family: 'Press Start 2P', sans-serif;
-    font-size: 40px;
-    color: white;
-    text-transform: uppercase;
+    font-family: 'Press Start 2P', sans-serif; /* Establece la fuente 'Press Start 2P' */
+    font-size: 40px; /* Establece el tamaño de la fuente */
+    color: white; /* El color del texto es blanco */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
     text-shadow:
-        3px 3px 0px rgb(116, 61, 36),
-        6px 6px 0px black,
-        9px 9px 0px rgb(116, 61, 36);
-    margin-bottom: 20px;
+        3px 3px 0px rgb(116, 61, 36), /* Sombra del texto para dar un efecto 3D */
+        6px 6px 0px black, /* Sombra secundaria para profundidad */
+        9px 9px 0px rgb(116, 61, 36); /* Sombra final con el mismo color que la primera sombra */
+    margin-bottom: 20px; /* Espaciado inferior */
 }
 
+/* Estilos para el contenedor del formulario de sesión */
 .body-contenedor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: auto;
+    display: flex; /* Utiliza Flexbox para organizar los elementos dentro */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    justify-content: center; /* Alinea los elementos horizontalmente al centro */
+    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+    height: auto; /* La altura se ajusta automáticamente */
 }
 
+/* Estilos para el contenedor de la ficha del entrenador */
 .contenedor-sesion {
-    background-color: #ffffff;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px 2px rgba(0, 0, 0, .1);
-    padding: 20px;
-    text-align: center;
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    width: 90%; /* Ocupa el 90% del ancho disponible */
+    max-width: 400px; /* Establece un ancho máximo de 400px */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, .1); /* Sombra sutil alrededor del contenedor */
+    padding: 20px; /* Espaciado interior */
+    text-align: center; /* Centra el texto dentro del contenedor */
 }
 
+/* Estilos para el título de la sección de la ficha */
 .titulo-seccion h5 {
-    font-size: 1.5em;
-    margin-bottom: 1rem;
+    font-size: 1.5em; /* Tamaño de fuente de 1.5em */
+    margin-bottom: 1rem; /* Espaciado inferior */
 }
 
+/* Estilos para los campos de entrada del formulario */
 .form-input {
-    position: relative;
-    margin-bottom: 1.5rem;
+    position: relative; /* Posición relativa para poder usar posiciones absolutas dentro de este contenedor */
+    margin-bottom: 1.5rem; /* Espaciado inferior */
 }
 
 .form-input input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
-    padding: 8px;
-    outline: none;
-    font-size: 16px;
+    width: 100%; /* Los campos de entrada ocupan el 100% del ancho */
+    border: none; /* Sin borde */
+    border-bottom: 1px solid rgba(0, 0, 0, .2); /* Solo una línea inferior */
+    padding: 8px; /* Espaciado interno */
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+    font-size: 16px; /* Tamaño de fuente de 16px */
 }
 
-.form-input input:focus {
-    border-bottom: 1px solid #744214;
-}
-.form-boton {
-    margin-top: 10px;
-}
-
-.btn-primary {
-    background-color: #744214;
-    border: none;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-primary:hover {
-    background-color: #553313;
-}
-
+/* Estilos responsivos para pantallas más pequeñas */
 @media (max-width: 780px) {
     .contenedor-sesion {
-        width: 90%;
+        width: 90%; /* Ajusta el ancho del formulario al 90% */
     }
 
     p {
-        font-size: 24px;
+        font-size: 24px; /* Reduce el tamaño del texto en dispositivos pequeños */
     }
 }
 
+/* Estilos para los botones */
+button {
+    background-color: #553313; /* Fondo marrón oscuro */
+    color: #ffffff; /* Color del texto blanco */
+    display: inline-block; /* Hace que el botón se comporte como un bloque en línea */
+    width: 150px; /* Ancho fijo de 150px */
+    height: 50px; /* Altura fija de 50px */
+    font-size: 18px; /* Tamaño de fuente de 18px */
+    border-radius: 15px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background 0.3s; /* Transición suave al cambiar el fondo */
+    font-family: 'Montserrat Alternates', sans-serif; /* Aplica la fuente 'Montserrat Alternates' */
+}
+
+/* Estilos cuando el botón es hover */
+button:hover {
+    background-color: #744a25; /* Cambia el color de fondo a un marrón más claro cuando se pasa el cursor */
+}
+
+/* Estilos adicionales para los campos de formulario */
+.form-input {
+    margin-bottom: 15px; /* Espaciado inferior */
+    text-align: left; /* Alinea el texto del formulario a la izquierda */
+}
+
+/* Estilos para las etiquetas de los campos de formulario */
+.form-input label {
+    font-size: 30px; /* Tamaño de fuente grande para las etiquetas */
+    color: #000000; /* Color negro */
+}
+
+/* Estilos para la ficha del entrenador */
+.ficha-entrenador {
+    font-family: 'Press Start 2P', cursive; /* Aplica la fuente 'Press Start 2P' */
+    background-color: #ffffff; /* Fondo blanco */
+    border: 4px solid #744a25; /* Borde marrón oscuro */
+    border-radius: 10px; /* Bordes redondeados */
+    width: 600px; /* Ancho de 600px */
+    height: 400px; /* Altura de 400px */
+    padding: 20px; /* Espaciado interior */
+    color: #000; /* Color del texto negro */
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    position: relative; /* Posición relativa */
+}
+
+/* Estilos para el encabezado de la ficha */
+.header-ficha {
+    display: flex; /* Flexbox para organizar los elementos en una fila */
+    justify-content: space-between; /* Espacio entre los elementos */
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 8px; /* Espaciado interior */
+    border: 2px solid #744a25; /* Borde marrón oscuro */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* Estilos para los títulos e ID dentro del encabezado */
+.titulo, .id {
+    font-size: 12px; /* Tamaño de fuente pequeño */
+}
+
+/* Estilos para los párrafos dentro de la sección de información */
+.info p {
+    margin: 10px 0; /* Espaciado superior e inferior */
+    font-size: 12px; /* Tamaño de fuente pequeño */
+}
+
+/* Estilos para las etiquetas dentro de la información */
+.etiqueta {
+    color: #744a25; /* Color marrón */
+    margin-right: 5px; /* Espaciado a la derecha */
+}
+
+/* Estilos para la sección de la imagen del sprite del entrenador */
+.sprite {
+    margin: 20px; /* Espaciado alrededor */
+    text-align: right; /* Alinea la imagen a la derecha */
+}
+
+/* Estilos para la imagen del sprite */
+.sprite img {
+    height: 300px; /* Ajusta la altura de la imagen */
+}
+
+/* Estilos para el contenido de la ficha */
+.ficha-contenido {
+    display: flex; /* Utiliza Flexbox */
+    justify-content: space-between; /* Espacio entre los elementos */
+    align-items: center; /* Alineación vertical al centro */
+    gap: 20px; /* Espacio entre los elementos */
+}
+
+/* Estilos para la sección de información */
+.info {
+    flex: 1; /* Hace que la sección ocupe el 100% del espacio disponible */
+}
+
+/* Estilos para la imagen del sprite (evita que se reduzca en tamaño) */
+.sprite {
+    flex-shrink: 0; /* No permite que la imagen se reduzca */
+}
+
+/* Estilos para la imagen del sprite en la ficha */
+.sprite img {
+    height: 200px; /* Altura ajustada a 200px */
+    max-width: 200px; /* Ancho máximo de 200px */
+    object-fit: contain; /* Asegura que la imagen se ajuste manteniendo la proporción */
+}

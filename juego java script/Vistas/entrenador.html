@@ -1,24 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POKIMON</title>
-    <link rel="stylesheet" href="../Css/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="../Js/index.js"></script>
+<!DOCTYPE html> <!-- Declara que el tipo de documento es HTML5 -->
+<html lang="es"> <!-- Establece el idioma de la página como español -->
+<head> <!-- Sección del encabezado donde se colocan los metadatos, enlaces a archivos de estilo, y scripts -->
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8, permitiendo caracteres especiales como tildes y acentos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la vista para dispositivos móviles, asegurando que la página se adapte a diferentes tamaños de pantalla -->
+    <title>POKIMON</title> <!-- Título de la página que aparece en la pestaña del navegador -->
+    <link rel="stylesheet" href="../Css/index.css"> <!-- Enlaza el archivo CSS para aplicar estilos a la página -->
+    <script src="../Js/index.js"></script> <!-- Enlaza el archivo JavaScript que contiene funciones y lógica para la página -->
 </head>
-
-<body>
-    
-    <p>BIENVENIDO AL MUNDO POKIMON</p>
-    <div class="container">
-        <div class="buttons">
-            <button class="btn btn-primary" type="button" onclick="window.location.href='index.html'">Jugar</button>
-        </div>
+<body> <!-- Inicia la sección del cuerpo de la página que contiene el contenido visible -->
+    <p>Entrenador</p> <!-- Un párrafo que muestra la palabra "Entrenador" como título o encabezado de la página -->
+    <div class="buttons"> <!-- Un contenedor para los botones de navegación -->
+        <button onclick="window.location.href='index.html'" class="btn btn-primary">Inicio</button> <!-- Botón que redirige a la página de inicio -->
+        <br><br> <!-- Se añaden saltos de línea para separar los botones -->
     </div>
+    <div class="ficha-entrenador"> <!-- Un contenedor para la "ficha" del entrenador, agrupa la información y la imagen -->
+        <section class="ficha-contenido"> <!-- Sección que agrupa el contenido de la ficha del entrenador -->
+            <section class="info"> <!-- Sección que contiene la información textual sobre el entrenador -->
+                <h3><span class="etiqueta">NOMBRE: </span> VICTOR</h3> <!-- Muestra el nombre del entrenador -->
+                <br> <!-- Salto de línea para separar visualmente el contenido -->
+                <br> <!-- Salto de línea adicional para más separación -->
+                <h3><span class="etiqueta">NIVEL: </span> 30</h3> <!-- Muestra el nivel del entrenador -->
+                <br> <!-- Salto de línea -->
+                <br> <!-- Salto de línea -->
+                <h3><span class="etiqueta">LIGA: </span> DIAMANTE</h3> <!-- Muestra la liga en la que el entrenador participa -->
+                <br> <!-- Salto de línea -->
+                <br> <!-- Salto de línea -->
+                <h3><span class="etiqueta">EDAD: </span> 17</h3> <!-- Muestra la edad del entrenador -->
+                <br> <!-- Salto de línea -->
+                <br> <!-- Salto de línea -->
+                <button>Tus Pokimones</button>
+            </section>
+            <section class="sprite"> <!-- Sección que contiene la imagen del entrenador -->
+                <img src="https://images.wikidexcdn.net/mwuploads/esssbwiki/thumb/c/c0/latest/20210725170725/Entrenador_Pok%C3%A9mon_RojoFuego_y_VerdeHoja.png/640px-Entrenador_Pok%C3%A9mon_RojoFuego_y_VerdeHoja.png" 
+                     alt="Entrenador Pokémon" /> <!-- Imagen del entrenador Pokémon con su atributo alt para accesibilidad -->
+            </section>
+        </section>
+         <!-- Un botón que, al hacer clic, puede redirigir a una sección con los Pokémon del entrenador (aunque no tiene funcionalidad en el código actual) -->
+    </div> <!-- Cierre del contenedor de la ficha del entrenador -->
 </body>
 
 </html>
