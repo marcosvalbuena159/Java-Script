@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokimon</title>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Pokimon</div>
+        <div class="auth-buttons">
+            <a href="login.html" class="auth-btn login-btn">Iniciar Sesión</a>
+            <a href="registro.html" class="auth-btn register-btn active">Registrarse</a>
+        </div>
+    </nav>
+    
+    <!-- Register Section -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <h2 class="auth-title">Registrarse</h2>
+            <!-- Formulario de Registro -->
+<form id="registerForm" class="auth-form">
+    <div class="form-group">
+        <label for="regFullName" class="form-label">Nombre Completo</label>
+        <input type="text" id="regFullName" class="form-input" required>
+    </div>
+    <div class="form-group">
+        <label for="regUsername" class="form-label">Nombre de Usuario</label>
+        <input type="text" id="regUsername" class="form-input" required>
+    </div>
+    <div class="form-group">
+        <label for="regEmail" class="form-label">Correo Electrónico</label>
+        <input type="email" id="regEmail" class="form-input" required>
+    </div>
+    <div class="form-group">
+        <label for="regPassword" class="form-label">Contraseña</label>
+        <input type="password" id="regPassword" class="form-input" required>
+    </div>
+    <div class="form-group">
+        <label for="regConfirmPassword" class="form-label">Confirmar Contraseña</label>
+        <input type="password" id="regConfirmPassword" class="form-input" required>
+    </div>
+    <button type="submit" class="submit-btn">Registrarse</button>
+</form>
+
+<script>
+    // Función para manejar el registro
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const fullName = document.getElementById('regFullName').value;
+        const username = document.getElementById('regUsername').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+        // Validar que las contraseñas coincidan
+        if (password !== confirmPassword) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+
+        // Crear un nuevo usuario
+        const newUser = {
+            fullName: fullName,
+            username: username,
+            email: email,
+            password: password,
+            level: 1 // Nivel inicial
+        };
+
+        // Comprobar si el correo ya está registrado
+        const existingUsers = JSON.parse(localStorage.getItem('pokimonUsers')) || [];
+        if (existingUsers.some(user => user.email === email)) {
+            alert('Este correo ya está registrado.');
+            return;
+        }
+
+        // Agregar el nuevo usuario
+        existingUsers.push(newUser);
+        localStorage.setItem('pokimonUsers', JSON.stringify(existingUsers));
+
+        // Redirigir al inicio de sesión
+        alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+        window.location.href = 'login.html'; // Redirigir al inicio de sesión
+    });
+</script>
+
+
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <ul class="footer-links">
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Términos de Servicio</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+        </ul>
+        <p class="footer-text">© 2025 Pokimon. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script src="../js/index.js"></script>
+</body>
+</html>

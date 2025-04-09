@@ -1,0 +1,437 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-image: url("https://img.freepik.com/vector-gratis/fondo-efecto-zoom_23-2149729412.jpg?ga=GA1.1.1041682253.1744164630&semt=ais_hybrid&w=740");
+    background-size: cover;        /* Hace que la imagen cubra toda la pantalla */
+    background-position: center;   /* Centra la imagen */
+    background-repeat: no-repeat;  /* Evita que la imagen se repita */
+    background-attachment: fixed;  /* Hace que el fondo no se mueva al deslizar */
+    width: 100%;
+    height: 100%;
+    color: #f0e6d2;
+    overflow-x: hidden;
+    margin: 0;  /* Elimina márgenes predeterminados que podrían afectar el diseño */
+    
+}
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.205);     
+    z-index: -1;
+}
+
+
+/* Navbar */
+.navbar {
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    color: #f0e6d2;
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #000000;
+}
+
+.auth-buttons {
+    display: flex;
+}
+
+.auth-btn {
+    background-color: #c89b3c;
+    color: #000000;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    margin-left: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.auth-btn:hover, .auth-btn.active {
+    background-color: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+    height: 70vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/api/placeholder/1200/800') no-repeat center center;
+    background-size: cover;
+    filter: brightness(0.6);
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+.play-btn {
+    background-color: #c89b3c;
+    color: #000000;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.play-btn:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Champions Section */
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.pokimon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pokimon-card {
+    background-color: #ffffff;
+    border: 2px solid #c89b3c;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pokimon-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.pokimon-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.pokimon-info {
+    padding: 1.5rem;
+}
+
+.pokimon-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #000000;
+}
+
+.pokimon-type {
+    color: #242424;
+    margin-bottom: 1rem;
+}
+
+.pokimon-desc {
+    color: #000000;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Auth Section (Login and Register) */
+.auth-section {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+}
+
+.auth-container {
+    background-color: #ffffff;
+    border: 1cqb solid #c89b3c;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.auth-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #000000;
+    text-align: center;
+}
+
+.auth-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #000000;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #d8d8d8;
+    border: 1px solid #555555;
+    color: #000000;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #202020;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1rem;
+    color: #a09b8c;
+}
+
+.form-footer a {
+    color: #000000;
+    text-decoration: none;
+}
+
+/* Trainer Profile */
+.trainer-profile {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 200px);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #c89b3c;
+    margin-right: 2rem;
+}
+
+.profile-info h2 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.profile-info p {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background-color: #c89b3c;
+    border: 2px solid #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #000000;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.my-pokimon-list {
+    margin-top: 3rem;
+}
+
+/* Footer */
+footer {
+    background-color: #000000;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.footer-links li {
+    margin: 0 1rem;
+}
+
+.footer-links a {
+    color: #f0e6d2;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #c89b3c;
+}
+
+.footer-text {
+    color: #a09b8c;
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        margin: 1rem 0;
+    }
+    
+    .nav-links li {
+        margin: 0 0.5rem;
+    }
+    
+    .auth-buttons {
+        margin-top: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-avatar {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+    }
+    
+    .footer-links li {
+        margin: 0.5rem 0;
+    }
+}

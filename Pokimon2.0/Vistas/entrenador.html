@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Entrenador - Pokimon</title>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Pokimon</div>
+        <div class="auth-buttons logged-in">
+            <a href="pokimones.html" class="auth-btn" id="profileBtn">Pokimones</a>
+            <a href="entrenador.html" class="auth-btn" id="profileBtn">Perfil</a>
+            <button class="auth-btn" id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </nav>
+    
+    <!-- Trainer Profile Section -->
+    <section class="trainer-profile" id="trainerProfile">
+        <div class="profile-header">
+            <img src="https://e7.pngegg.com/pngimages/293/633/png-clipart-ash-ketchum-pokemon-x-and-y-pokemon-trainer-pokemon-xy-thumbnail.png" alt="Avatar de entrenador" class="profile-avatar">
+            <div class="profile-info">
+                <h2 id="trainerName">Entrenador</h2>
+                <p><span id="trainerLevel">1</span> • Rango <span id="trainerRank">Novato</span></p>
+            </div>
+        </div>
+        
+        <div class="profile-stats">
+            <div class="stat-card">
+                <div class="stat-value" id="pokimonCaptured">0</div>
+                <div class="stat-label">Pokimones Capturados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="battlesWon">0</div>
+                <div class="stat-label">Batallas Ganadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="gymsDefeated">0</div>
+                <div class="stat-label">Equipos Derrotados</div>
+            </div>
+        </div>
+        
+        <div class="my-pokimon-list">
+            <h2 class="section-title">Mis Pokimones</h2>
+            <div class="pokimon-grid" id="myPokimonGrid">
+                <!-- User's pokimon will be added here -->
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = getUserData();
+    
+            if (currentUser) {
+                // Mostrar información del usuario
+                document.getElementById('trainerName').textContent = currentUser.username;
+                document.getElementById('trainerLevel').textContent = `Nivel: ${currentUser.level}`;
+                
+                // Lógica para cerrar sesión
+                document.getElementById('logoutBtn').addEventListener('click', logout);
+            } else {
+                // Redirigir si no hay usuario autenticado
+                window.location.href = 'inicio_sesion.html';
+            }
+        });
+    
+        // Función para cerrar sesión
+        function logout() {
+            localStorage.removeItem('pokimonUser');
+            window.location.href = 'index.html'; // Redirigir al inicio de sesión
+        }
+    </script>
+    
+    
+    <!-- Footer -->
+    <footer>
+        <ul class="footer-links">
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Términos de Servicio</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+        </ul>
+        <p class="footer-text">© 2025 Pokimon. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script src="../js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokimon</title>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Pokimon</div>
+        <div class="auth-buttons">
+            <a href="login.html" class="auth-btn login-btn active">Iniciar Sesión</a>
+            <a href="registro.html" class="auth-btn register-btn">Registrarse</a>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <h2 class="auth-title">Iniciar Sesión</h2>
+            <!-- Formulario de Inicio de Sesión -->
+<form id="loginForm" class="auth-form">
+    <div class="form-group">
+        <label for="loginEmail" class="form-label">Correo Electrónico</label>
+        <input type="email" id="loginEmail" class="form-input" required>
+    </div>
+    <div class="form-group">
+        <label for="loginPassword" class="form-label">Contraseña</label>
+        <input type="password" id="loginPassword" class="form-input" required>
+    </div>
+    <button type="submit" class="submit-btn">Iniciar Sesión</button>
+</form>
+
+<script>
+    // Función para manejar el inicio de sesión
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        // Obtener los usuarios registrados desde localStorage
+        const users = JSON.parse(localStorage.getItem('pokimonUsers')) || [];
+
+        // Buscar si existe un usuario con ese correo y contraseña
+        const user = users.find(user => user.email === email && user.password === password);
+
+        if (user) {
+            // Guardar los datos del usuario en localStorage para sesiones futuras
+            saveUserData(user);
+
+            // Redirigir al perfil del entrenador
+            window.location.href = 'entrenador.html'; // Redirige al perfil
+        } else {
+            alert('Correo electrónico o contraseña incorrectos.');
+        }
+    });
+
+    // Función para guardar los datos del usuario en localStorage
+    function saveUserData(userData) {
+        localStorage.setItem('pokimonUser', JSON.stringify(userData));
+    }
+</script>
+
+
+        </div>
+    </section>
+    <footer>
+        <ul class="footer-links">
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Términos de Servicio</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+        </ul>
+        <p class="footer-text">© 2025 Pokimon. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="../js/index.js"></script>
+</body>
+
+</html>

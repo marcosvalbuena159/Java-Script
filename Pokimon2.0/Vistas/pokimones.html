@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokimon</title>
+    <link rel="stylesheet" href="../css/index.css">
+    
+    <!-- Agregar React y ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Agregar Babel para JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Pokimon</div>
+        <div class="auth-buttons logged-in">
+            <a href="pokimones.html" class="auth-btn">Pokimones</a>
+            <a href="entrenador.html" class="auth-btn">Perfil</a>
+            <button class="auth-btn" id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </nav>
+    
+    <!-- Contenedor para la aplicación React -->
+    <div id="pokemon-selector-app"></div>
+    
+    <!-- Footer -->
+    <footer>
+        <ul class="footer-links">
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Términos de Servicio</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+        </ul>
+        <p class="footer-text">© 2025 Pokimon. Todos los derechos reservados.</p>
+    </footer>
+    
+    <!-- Código del componente React -->
+    <script type="text/babel">
+        // Componente de Selección de Pokémon
+        function PokemonSelector() {
+            const [selectedPokemon, setSelectedPokemon] = React.useState(null);
+            const [searchTerm, setSearchTerm] = React.useState('');
+            const [activeFilter, setActiveFilter] = React.useState('all');
+            const [pokemons, setPokemons] = React.useState([]);
+
+            // Cargar datos de Pokémon
+            React.useEffect(() => {
+                // Puedes usar los datos de tu archivo index.js 
+                const pokemonData = [
+                    { id: 1, name: "Pikashu", type: "Eléctrico", image: "https://i.pinimg.com/originals/e9/38/d1/e938d18fc07a3ffd16b4864ef2f1308f.gif", description: "Un pokimon eléctrico muy rápido y poderoso. Su ataque principal es el impactrueno." },
+                    { id: 2, name: "Charmandor", type: "Fuego", image: "https://static.wikia.nocookie.net/rijon/images/8/8f/4.gif/revision/latest/thumbnail/width/360/height/360?cb=20231213003509", description: "Un pokimon de fuego con una llama en su cola. Cuanto más brilla la llama, más fuerza tiene." },
+                    { id: 3, name: "Squirtol", type: "Agua", image: "https://i.gifer.com/origin/d8/d83e9951f28fc811c1166b16dcaec930_w200.gif", description: "Un pokimon de agua que puede disparar potentes chorros de agua desde su boca." },
+                    { id: 4, name: "Bulbasauro", type: "Planta", image: "https://media.tenor.com/mCfgYm2yNiIAAAAM/bulbasaur-pokemon.gif", description: "Un pokimon de planta con una semilla en su espalda que crece a medida que evoluciona." },
+                    { id: 5, name: "Geodudé", type: "Roca", image: "https://static.wikia.nocookie.net/rijon/images/9/93/74.gif/revision/latest/thumbnail/width/360/height/360?cb=20231209091305", description: "Un pokimon de roca con forma de piedra. Puede hacer rodar su cuerpo para atacar." },
+                    { id: 6, name: "Jiglipuf", type: "Normal", image: "https://64.media.tumblr.com/a48a6426cca9aacb1c6a7d326f3a61e5/tumblr_nr14tdpnHj1u10sg9o1_400.gif", description: "Un pokimon normal muy adorable. Puede dormir a sus enemigos con su canto." },
+                    { id: 7, name: "Gastli", type: "Fantasma", image: "https://media3.giphy.com/media/0ap4P1CoP9ksodlDOB/giphy.gif?cid=6c09b9522523f79xwm0l56m849dzvevytnn31xj5wvgtn78l&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s", description: "Un pokimon fantasma que puede atravesar paredes y poseer a otros seres." },
+                    { id: 8, name: "Psyduk", type: "Psíquico", image: "https://i.gifer.com/origin/d8/d80f886437ed5e505648c5c36ce17fcc_w200.gif", description: "Un pokimon psíquico que sufre constantes dolores de cabeza que le otorgan grandes poderes." },
+                    { id: 9, name: "Magikarpo", type: "Agua", image: "https://media.tenor.com/PwnLxYiXYtwAAAAM/pokemon-magikarp.gif", description: "Un pokimon de agua que parece inútil, pero que evoluciona en un poderoso Gyaradós." },
+                    { id: 10, name: "Arbok", type: "Veneno", image: "https://media.tenor.com/yX1jigVb6cEAAAAM/arbok-pokemon.gif", description: "Un pokimon serpiente venenoso con marcas intimidantes en su capucha." },
+                    { id: 11, name: "Raichu", type: "Eléctrico", image: "https://media.tenor.com/SbCYyNZXhhcAAAAj/raichu-happy.gif", description: "La evolución de Pikashu, con mayor poder eléctrico y velocidad." },
+                    { id: 12, name: "Sandshrew", type: "Tierra", image: "https://66.media.tumblr.com/3db865d1a043cbea779c7743daaac75e/tumblr_mjlg61HPuq1rfjowdo1_500.gif", description: "Un pokimon con escamas duras como la roca que puede enrollarse en una bola." }
+                ];
+                setPokemons(pokemonData);
+            }, []);
+
+            // Filtrar Pokémon
+            const filteredPokemons = pokemons.filter(pokemon => {
+                const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesType = activeFilter === 'all' || pokemon.type === activeFilter;
+                return matchesSearch && matchesType;
+            });
+
+            // Tipos únicos para el filtro
+            const uniqueTypes = ['all', ...new Set(pokemons.map(pokemon => pokemon.type))];
+
+            // Seleccionar un Pokémon
+            const handleSelectPokemon = (pokemon) => {
+                setSelectedPokemon(pokemon);
+            };
+
+            // Cerrar detalle
+            const handleCloseDetail = () => {
+                setSelectedPokemon(null);
+            };
+
+            return (
+                <div className="pokimon-section" style={{minHeight: "calc(100vh - 200px)"}}>
+                    <h1 className="section-title">Selección de Pokimon</h1>
+                    
+                    {/* Barra de búsqueda y filtros */}
+                    <div style={{maxWidth: "1200px", margin: "0 auto", display: "flex", gap: "20px", marginBottom: "30px"}}>
+                        <div style={{position: "relative", flex: 1}}>
+                            <span style={{position: "absolute", left: "15px", top: "50%", transform: "translateY(-50%)"}}>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </span>
+                            <input
+                                type="text"
+                                placeholder="Buscar Pokimon"
+                                style={{width: "100%", padding: "12px 40px", background: "#000000", border: "1px solid #1e2328", color: "#f0e6d2"}}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                        
+                        <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
+                            <span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                </svg>
+                            </span>
+                            <div style={{display: "flex", background: "#000000", border: "1px solid #1e2328"}}>
+                                {uniqueTypes.map(type => (
+                                    <button
+                                        key={type}
+                                        style={{
+                                            padding: "10px 20px",
+                                            background: activeFilter === type ? "#c89b3c" : "transparent",
+                                            color: activeFilter === type ? "#000000" : "#f0e6d2",
+                                            border: "none",
+                                            cursor: "pointer"
+                                        }}
+                                        onClick={() => setActiveFilter(type)}
+                                    >
+                                        {type === 'all' ? 'Todos' : type}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Grid de Pokémon */}
+                    <div className="pokimon-grid">
+                        {filteredPokemons.map(pokemon => (
+                            <div
+                                key={pokemon.id}
+                                className="pokimon-card"
+                                style={selectedPokemon?.id === pokemon.id ? {border: "2px solid #c89b3c"} : {}}
+                                onClick={() => handleSelectPokemon(pokemon)}
+                            >
+                                <img
+                                    src={pokemon.image}
+                                    alt={pokemon.name}
+                                    className="pokimon-img"
+                                />
+                                <div className="pokimon-info">
+                                    <h3 className="pokimon-name">{pokemon.name}</h3>
+                                    <p className="pokimon-type">Tipo: {pokemon.type}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Panel de detalle */}
+                    {selectedPokemon && (
+                        <div style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundColor: "rgba(0, 0, 0, 0.8)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            zIndex: 1000
+                        }}>
+                            <div style={{
+                                backgroundColor: "#ffffff",
+                                border: "2px solid #c89b3c",
+                                padding: "24px",
+                                maxWidth: "800px",
+                                width: "90%",
+                                position: "relative"
+                            }}>
+                                <button 
+                                    style={{
+                                        position: "absolute",
+                                        top: "15px",
+                                        right: "15px",
+                                        background: "none",
+                                        border: "none",
+                                        color: "#000000",
+                                        cursor: "pointer",
+                                        fontSize: "24px"
+                                    }}
+                                    onClick={handleCloseDetail}
+                                >
+                                    ✕
+                                </button>
+                                
+                                <div style={{display: "flex", flexDirection: window.innerWidth < 768 ? "column" : "row", gap: "24px"}}>
+                                    <img 
+                                        src={selectedPokemon.image} 
+                                        alt={selectedPokemon.name}
+                                        style={{
+                                            width: window.innerWidth < 768 ? "100%" : "40%",
+                                            objectFit: "cover"
+                                        }}
+                                    />
+                                    
+                                    <div style={{flex: 1}}>
+                                        <h2 style={{fontSize: "28px", fontWeight: "bold", color: "#000000", marginBottom: "8px"}}>{selectedPokemon.name}</h2>
+                                        <p style={{fontSize: "18px", color: "#000000", marginBottom: "16px"}}>Tipo: {selectedPokemon.type}</p>
+                                        <p style={{color: "#000000", marginBottom: "24px"}}>{selectedPokemon.description}</p>
+                                        
+                                        {/* Estadísticas */}
+                                        <div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "24px"}}>
+                                            <div style={{background: "#ebeaea", padding: "12px"}}>
+                                                <div style={{fontSize: "20px", color: "#000000"}}>Ataque</div>
+                                                <div style={{fontSize: "20px", color: "#000000"}}>{Math.floor(Math.random() * 100)}</div>
+                                            </div>
+                                            <div style={{background: "#ebeaea", padding: "12px"}}>
+                                                <div style={{fontSize: "ebeaea", color: "#000000"}}>Defensa</div>
+                                                <div style={{fontSize: "20px", color: "#000000"}}>{Math.floor(Math.random() * 100)}</div>
+                                            </div>
+                                            <div style={{background: "#ebeaea", padding: "12px"}}>
+                                                <div style={{fontSize: "20px", color: "#000000"}}>Velocidad</div>
+                                                <div style={{fontSize: "20px", color: "#000000"}}>{Math.floor(Math.random() * 100)}</div>
+                                            </div>
+                                            <div style={{background: "#ebeaea", padding: "12px"}}>
+                                                <div style={{fontSize: "20px", color: "#000000"}}>Especial</div>
+                                                <div style={{fontSize: "20px", color: "#000000"}}>{Math.floor(Math.random() * 100)}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button 
+                                            style={{
+                                                backgroundColor: "#c89b3c",
+                                                color: "#000000",
+                                                fontWeight: "bold",
+                                                padding: "12px 24px",
+                                                width: "100%",
+                                                textTransform: "uppercase",
+                                                border: "none",
+                                                cursor: "pointer"
+                                            }}
+                                            onClick={() => {
+                                                alert(`Has seleccionado a ${selectedPokemon.name}!`);
+                                                handleCloseDetail();
+                                            }}
+                                        >
+                                            Seleccionar Pokimon
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {/* Botón de confirmación */}
+                    <div style={{marginTop: "40px", textAlign: "center"}}>
+                        {selectedPokemon ? (
+                            <button 
+                                className="play-btn"
+                                style={{
+                                    backgroundColor: "#c89b3c",
+                                    color: "#000000",
+                                    border: "none",
+                                    padding: "16px 40px",
+                                    fontSize: "18px",
+                                    fontWeight: "bold",
+                                    textTransform: "uppercase",
+                                    cursor: "pointer"
+                                }}
+                            >
+                                Confirmar: {selectedPokemon.name}
+                            </button>
+                        ) : (
+                            <p style={{color: "#a09b8c"}}>Selecciona un Pokimon para continuar</p>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        // Renderizar el componente
+        const container = document.getElementById('pokemon-selector-app');
+        const root = ReactDOM.createRoot(container);
+        root.render(<PokemonSelector />);
+    </script>
+    
+    <script src="../js/index.js"></script>
+    <script>
+        // Lógica para cerrar sesión
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('pokimonUser');
+            window.location.href = 'index.html';
+        });
+        
+        // Verificar autenticación
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = getUserData();
+            if (!currentUser) {
+                window.location.href = 'inicio_sesion.html';
+            }
+        });
+    </script>
+</body>
+</html>
