@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokimon</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        /* Estilos específicos para la página de batalla */
+        .battle-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .battle-arena {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 3px solid #c89b3c;
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .battle-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+        }
+        
+        .pokimon-battle {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .pokimon-battle {
+                flex-direction: column;
+            }
+        }
+        
+        .battle-side {
+            text-align: center;
+            width: 45%;
+        }
+        
+        @media (max-width: 768px) {
+            .battle-side {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        .battle-pokimon-img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+        
+        .battle-pokimon-name {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .battle-pokimon-type {
+            color: #c89b3c;
+            margin-bottom: 1rem;
+        }
+        
+        .health-bar-container {
+            width: 100%;
+            height: 20px;
+            background-color: #444;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .health-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.5s ease;
+        }
+        
+        .health-text {
+            color: #ffffff;
+        }
+        
+        .vs-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #c89b3c;
+            color: #000000;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 1rem;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .battle-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .battle-btn {
+            background-color: #c89b3c;
+            color: #000000;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 250px;
+        }
+        
+        .battle-btn:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+        
+        .battle-btn:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        
+        .result-message {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #c89b3c;
+            border-radius: 10px;
+            padding: 1rem;
+            display: none;
+        }
+        
+        .battle-effects {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .attack-animation {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzRwMzZhNmYyYzk3M2Q5MTFkNjhkZWEwYTE1YTBhMWZiM2VmYjUwZiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3o7bu8mra9vUM2a8wM/giphy.gif');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Pokimon</div>
+        <div class="auth-buttons logged-in">
+            <a href="pokimones.html" class="auth-btn">Pokimones</a>
+            <a href="entrenador.html" class="auth-btn">Perfil</a>
+            <button class="auth-btn" id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </nav>
+    
+    <!-- Contenido principal -->
+    <div class="battle-container">
+        
+        <div class="battle-arena">
+            <div class="pokimon-battle">
+                <div class="battle-side player-side">
+                    <img id="playerPokimonImg" src="" alt="Tu Pokimon" class="battle-pokimon-img">
+                    <h3 id="playerPokimonName" class="battle-pokimon-name"></h3>
+                    <p id="playerPokimonType" class="battle-pokimon-type"></p>
+                    <div class="health-bar-container">
+                        <div id="playerHealthBar" class="health-bar" style="width: 100%;"></div>
+                    </div>
+                    <p class="health-text"><span id="playerCurrentHealth">100</span>/<span id="playerMaxHealth">100</span> HP</p>
+                </div>
+                
+                <div class="vs-badge">VS</div>
+                
+                <div class="battle-side opponent-side">
+                    <img id="opponentPokimonImg" src="" alt="Pokimon Rival" class="battle-pokimon-img">
+                    <h3 id="opponentPokimonName" class="battle-pokimon-name"></h3>
+                    <p id="opponentPokimonType" class="battle-pokimon-type"></p>
+                    <div class="health-bar-container">
+                        <div id="opponentHealthBar" class="health-bar" style="width: 100%;"></div>
+                    </div>
+                    <p class="health-text"><span id="opponentCurrentHealth">100</span>/<span id="opponentMaxHealth">100</span> HP</p>
+                </div>
+            </div>
+            
+            <div class="battle-effects">
+                <div class="attack-animation" id="attackAnimation"></div>
+            </div>
+        </div>
+        
+        <div id="resultMessage" class="result-message"></div>
+        
+        <div class="battle-log" id="battleLog">
+            <div class="log-entry"></div>
+        </div>
+        
+        <div class="battle-controls">
+            <button id="attackBtn" class="battle-btn">Atacar</button>
+            <button id="specialAttackBtn" class="battle-btn">Ataque Especial</button>
+            <button id="newBattleBtn" class="battle-btn" style="display: none;">Nueva Batalla</button>
+            <button id="returnToSelectBtn" class="battle-btn" style="display: none;">Volver a Selección</button>
+        </div>
+    </div>
+    
+    <script>
+        // Funciones para guardar y recuperar datos del usuario y pokimon de localStorage
+        function saveUserData(userData) {
+            localStorage.setItem('pokimonUser', JSON.stringify(userData));
+        }
+
+        function getUserData() {
+            const userData = localStorage.getItem('pokimonUser');
+            return userData ? JSON.parse(userData) : null;
+        }
+        
+        function getSelectedPokimon() {
+            const selectedPokimon = localStorage.getItem('selectedPokimon');
+            return selectedPokimon ? JSON.parse(selectedPokimon) : null;
+        }
+        
+        // Datos de Pokimon para seleccionar un oponente aleatorio
+        const pokimonData = [
+            { id: 1, name: "Pikashu", type: "Eléctrico", image: "https://i.pinimg.com/originals/e9/38/d1/e938d18fc07a3ffd16b4864ef2f1308f.gif", description: "Un pokimon eléctrico muy rápido y poderoso. Su ataque principal es el impactrueno." },
+            { id: 2, name: "Charmandor", type: "Fuego", image: "https://static.wikia.nocookie.net/rijon/images/8/8f/4.gif/revision/latest/thumbnail/width/360/height/360?cb=20231213003509", description: "Un pokimon de fuego con una llama en su cola. Cuanto más brilla la llama, más fuerza tiene." },
+            { id: 3, name: "Squirtol", type: "Agua", image: "https://i.gifer.com/origin/d8/d83e9951f28fc811c1166b16dcaec930_w200.gif", description: "Un pokimon de agua que puede disparar potentes chorros de agua desde su boca." },
+            { id: 4, name: "Bulbasauro", type: "Planta", image: "https://media.tenor.com/mCfgYm2yNiIAAAAM/bulbasaur-pokemon.gif", description: "Un pokimon de planta con una semilla en su espalda que crece a medida que evoluciona." },
+            { id: 5, name: "Geodudé", type: "Roca", image: "https://static.wikia.nocookie.net/rijon/images/9/93/74.gif/revision/latest/thumbnail/width/360/height/360?cb=20231209091305", description: "Un pokimon de roca con forma de piedra. Puede hacer rodar su cuerpo para atacar." },
+            { id: 6, name: "Jiglipuf", type: "Normal", image: "https://64.media.tumblr.com/a48a6426cca9aacb1c6a7d326f3a61e5/tumblr_nr14tdpnHj1u10sg9o1_400.gif", description: "Un pokimon normal muy adorable. Puede dormir a sus enemigos con su canto." },
+            { id: 7, name: "Gastli", type: "Fantasma", image: "https://media3.giphy.com/media/0ap4P1CoP9ksodlDOB/giphy.gif?cid=6c09b9522523f79xwm0l56m849dzvevytnn31xj5wvgtn78l&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=s", description: "Un pokimon fantasma que puede atravesar paredes y poseer a otros seres." },
+            { id: 8, name: "Psyduk", type: "Psíquico", image: "https://i.gifer.com/origin/d8/d80f886437ed5e505648c5c36ce17fcc_w200.gif", description: "Un pokimon psíquico que sufre constantes dolores de cabeza que le otorgan grandes poderes." },
+            { id: 9, name: "Magikarpo", type: "Agua", image: "https://media.tenor.com/PwnLxYiXYtwAAAAM/pokemon-magikarp.gif", description: "Un pokimon de agua que parece inútil, pero que evoluciona en un poderoso Gyaradós." },
+            { id: 10, name: "Arbok", type: "Veneno", image: "https://media.tenor.com/yX1jigVb6cEAAAAM/arbok-pokemon.gif", description: "Un pokimon serpiente venenoso con marcas intimidantes en su capucha." },
+            { id: 11, name: "Raichu", type: "Eléctrico", image: "https://media.tenor.com/SbCYyNZXhhcAAAAj/raichu-happy.gif", description: "La evolución de Pikashu, con mayor poder eléctrico y velocidad." },
+            { id: 12, name: "Sandshrew", type: "Tierra", image: "https://66.media.tumblr.com/3db865d1a043cbea779c7743daaac75e/tumblr_mjlg61HPuq1rfjowdo1_500.gif", description: "Un pokimon con escamas duras como la roca que puede enrollarse en una bola." }
+        ];
+        
+        // Variables para la batalla
+        let playerPokimon;
+        let opponentPokimon;
+        let playerHealth = 100;
+        let opponentHealth = 100;
+        let battleEnded = false;
+        let playerTurn = true;
+        
+        // Verificar autenticación al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = getUserData();
+            if (!currentUser) {
+                window.location.href = 'inicio_sesion.html';
+                return;
+            }
+            
+            // Obtener el Pokimon seleccionado
+            playerPokimon = getSelectedPokimon();
+            if (!playerPokimon) {
+                window.location.href = 'pokimones.html';
+                return;
+            }
+            
+            // Seleccionar un oponente aleatorio (diferente al del jugador)
+            do {
+                const randomIndex = Math.floor(Math.random() * pokimonData.length);
+                opponentPokimon = pokimonData[randomIndex];
+            } while (opponentPokimon.id === playerPokimon.id);
+            
+            // Inicializar la batalla
+            initBattle();
+            
+            // Lógica para cerrar sesión
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('pokimonUser');
+                window.location.href = 'index.html';
+            });
+            
+            // Eventos de botones
+            document.getElementById('attackBtn').addEventListener('click', playerAttack);
+            document.getElementById('specialAttackBtn').addEventListener('click', playerSpecialAttack);
+            document.getElementById('newBattleBtn').addEventListener('click', resetBattle);
+            document.getElementById('returnToSelectBtn').addEventListener('click', function() {
+                window.location.href = 'pokimones.html';
+            });
+        });
+        
+        // Inicializar la batalla
+        function initBattle() {
+            // Configurar los datos del Pokimon del jugador
+            document.getElementById('playerPokimonImg').src = playerPokimon.image;
+            document.getElementById('playerPokimonName').textContent = playerPokimon.name;
+            document.getElementById('playerPokimonType').textContent = `Tipo: ${playerPokimon.type}`;
+            
+            // Configurar los datos del Pokimon oponente
+            document.getElementById('opponentPokimonImg').src = opponentPokimon.image;
+            document.getElementById('opponentPokimonName').textContent = opponentPokimon.name;
+            document.getElementById('opponentPokimonType').textContent = `Tipo: ${opponentPokimon.type}`;
+    
+        }
+        
+        // Ataque normal del jugador
+        function playerAttack() {
+            if (battleEnded || !playerTurn) return;
+            
+            // Calcular daño (entre 10 y 20)
+            const damage = Math.floor(Math.random() * 11) + 10;
+            
+            // Realizar animación de ataque
+            showAttackAnimation('player');
+            
+            // Reducir salud del oponente
+            setTimeout(() => {
+                opponentHealth = Math.max(0, opponentHealth - damage);
+                updateHealthBar('opponent', opponentHealth);
+                
+                
+                // Verificar si la batalla ha terminado
+                if (opponentHealth <= 0) {
+                    endBattle(true);
+                    return;
+                }
+                
+                // Cambiar turno
+                playerTurn = false;
+                disablePlayerButtons(true);
+                
+                // Ataque del oponente después de un retraso
+                setTimeout(opponentAttack, 1500);
+            }, 500);
+        }
+        
+        // Ataque especial del jugador (más fuerte pero con cooldown)
+        function playerSpecialAttack() {
+            if (battleEnded || !playerTurn) return;
+            
+            // Desactivar el botón de ataque especial por 2 turnos
+            const specialAttackBtn = document.getElementById('specialAttackBtn');
+            specialAttackBtn.disabled = true;
+            
+            // Calcular daño (entre 20 y 35)
+            const damage = Math.floor(Math.random() * 16) + 20;
+            
+            // Realizar animación de ataque especial
+            showAttackAnimation('player', true);
+            
+            // Reducir salud del oponente
+            setTimeout(() => {
+                opponentHealth = Math.max(0, opponentHealth - damage);
+                updateHealthBar('opponent', opponentHealth);
+                
+                
+                // Verificar si la batalla ha terminado
+                if (opponentHealth <= 0) {
+                    endBattle(true);
+                    return;
+                }
+                
+                // Cambiar turno
+                playerTurn = false;
+                disablePlayerButtons(true);
+                
+                // Ataque del oponente después de un retraso
+                setTimeout(opponentAttack, 1500);
+                
+                // Reactivar el botón de ataque especial después de 2 turnos
+                setTimeout(() => {
+                    if (!battleEnded) {
+                        specialAttackBtn.disabled = false;
+                        addLogEntry("¡Ataque especial disponible de nuevo!");
+                    }
+                }, 4000);
+            }, 500);
+        }
+        
+        // Ataque del oponente
+        function opponentAttack() {
+            if (battleEnded) return;
+            
+            // Calcular daño (entre 8 y 18)
+            const damage = Math.floor(Math.random() * 11) + 8;
+            
+            // Realizar animación de ataque
+            showAttackAnimation('opponent');
+            
+            // Reducir salud del jugador
+            setTimeout(() => {
+                playerHealth = Math.max(0, playerHealth - damage);
+                updateHealthBar('player', playerHealth);
+                
+                
+                // Verificar si la batalla ha terminado
+                if (playerHealth <= 0) {
+                    endBattle(false);
+                    return;
+                }
+                
+                // Cambiar turno
+                playerTurn = true;
+                disablePlayerButtons(false);
+            }, 500);
+        }
+        
+        // Actualizar la barra de salud
+        function updateHealthBar(target, health) {
+            const healthBar = document.getElementById(`${target}HealthBar`);
+            const currentHealthElement = document.getElementById(`${target}CurrentHealth`);
+            
+            healthBar.style.width = `${health}%`;
+            currentHealthElement.textContent = health;
+            
+            // Cambiar color según la salud
+            if (health <= 20) {
+                healthBar.style.backgroundColor = '#F44336'; // Rojo
+            } else if (health <= 50) {
+                healthBar.style.backgroundColor = '#FFC107'; // Amarillo
+            } else {
+                healthBar.style.backgroundColor = '#4CAF50'; // Verde
+            }
+        }
+        
+        // Mostrar animación de ataque
+        function showAttackAnimation(attacker, isSpecial = false) {
+            const animation = document.getElementById('attackAnimation');
+            
+            // Posicionar la animación según el atacante
+            if (attacker === 'player') {
+                animation.style.left = '30%';
+                animation.style.top = '40%';
+            } else {
+                animation.style.left = '60%';
+                animation.style.top = '40%';
+            }
+            
+            // Si es un ataque especial, usar una animación diferente
+            if (isSpecial) {
+                animation.style.backgroundImage = "url('https://media.tenor.com/N3LXnQBsJKYAAAAj/explosion-boom.gif')";
+                animation.style.width = '150px';
+                animation.style.height = '150px';
+            } else {
+                animation.style.backgroundImage = "url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzRwMzZhNmYyYzk3M2Q5MTFkNjhkZWEwYTE1YTBhMWZiM2VmYjUwZiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/3o7bu8mra9vUM2a8wM/giphy.gif')";
+                animation.style.width = '100px';
+                animation.style.height = '100px';
+            }
+            
+            // Mostrar y mover la animación
+            animation.style.opacity = '1';
+            
+            if (attacker === 'player') {
+                animation.style.transform = 'translateX(200px)';
+            } else {
+                animation.style.transform = 'translateX(-200px)';
+            }
+            
+            // Ocultar después de la animación
+            setTimeout(() => {
+                animation.style.opacity = '0';
+                animation.style.transform = 'translateX(0)';
+            }, 500);
+        }
+        
+        // Habilitar/deshabilitar botones de ataque
+        function disablePlayerButtons(disabled) {
+            document.getElementById('attackBtn').disabled = disabled;
+            if (!document.getElementById('specialAttackBtn').disabled) {
+                document.getElementById('specialAttackBtn').disabled = disabled;
+            }
+        }
+        
+        // Finalizar la batalla
+        function endBattle(playerWon) {
+            battleEnded = true;
+            
+            // Ocultar botones de ataque
+            document.getElementById('attackBtn').style.display = 'none';
+            document.getElementById('specialAttackBtn').style.display = 'none';
+            
+            // Mostrar botones de nueva batalla y volver a selección
+            document.getElementById('newBattleBtn').style.display = 'block';
+            document.getElementById('returnToSelectBtn').style.display = 'block';
+            
+            // Mostrar mensaje de resultado
+            const resultMessage = document.getElementById('resultMessage');
+            
+            if (playerWon) {
+                resultMessage.textContent = `¡VICTORIA! ¡Tu ${playerPokimon.name} ha derrotado a ${opponentPokimon.name}!`;
+                addLogEntry(`¡${playerPokimon.name} ha ganado la batalla!`);
+            } else {
+                resultMessage.textContent = `¡DERROTA! ¡${opponentPokimon.name} ha derrotado a tu ${playerPokimon.name}!`;
+                addLogEntry(`¡${opponentPokimon.name} ha ganado la batalla!`);
+            }
+            
+            // Mostrar el mensaje de resultado
+            resultMessage.style.display = 'block';
+        }
+        
+        // Reiniciar la batalla
+        function resetBattle() {
+            // Ocultar mensaje de resultado
+            document.getElementById('resultMessage').style.display = 'none';
+            
+            // Mostrar botones de ataque
+            document.getElementById('attackBtn').style.display = 'block';
+            document.getElementById('specialAttackBtn').style.display = 'block';
+            
+            // Ocultar botones de nueva batalla y volver a selección
+            document.getElementById('newBattleBtn').style.display = 'none';
+            document.getElementById('returnToSelectBtn').style.display = 'none';
+            
+            // Reiniciar variables
+            playerHealth = 100;
+            opponentHealth = 100;
+            battleEnded = false;
+            playerTurn = true;
+            
+            // Actualizar barras de salud
+            updateHealthBar('player', playerHealth);
+            updateHealthBar('opponent', opponentHealth);
+            
+            // Habilitar botones
+            disablePlayerButtons(false);
+            document.getElementById('specialAttackBtn').disabled = false;
+            
+            // Seleccionar un nuevo oponente aleatorio
+            do {
+                const randomIndex = Math.floor(Math.random() * pokimonData.length);
+                opponentPokimon = pokimonData[randomIndex];
+            } while (opponentPokimon.id === playerPokimon.id);
+            
+            // Actualizar la interfaz
+            document.getElementById('opponentPokimonImg').src = opponentPokimon.image;
+            document.getElementById('opponentPokimonName').textContent = opponentPokimon.name;
+            document.getElementById('opponentPokimonType').textContent = `Tipo: ${opponentPokimon.type}`;
+            
+            // Limpiar el log de batalla
+            document.getElementById('battleLog').innerHTML = '';
+            addLogEntry('¡La batalla ha comenzado!');
+            addLogEntry(`¡${playerPokimon.name} se enfrenta a ${opponentPokimon.name}!`);
+        }
+    </script>
+</body>
+</html>
